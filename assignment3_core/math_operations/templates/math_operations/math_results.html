@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Operations Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-values {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            border-left: 4px solid #2196F3;
+        }
+        .steps {
+            margin-bottom: 25px;
+        }
+        .step {
+            background-color: #f9f9f9;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .final-result {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .back-btn {
+            background-color: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+            text-decoration: none;
+            color: white;
+        }
+        .calculation-summary {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Math Operations Results</h1>
+        
+        {% if success %}
+            <div class="input-values">
+                <h3>Input Values:</h3>
+                <p><strong>X:</strong> {{ original_x }}</p>
+                <p><strong>Y:</strong> {{ original_y }}</p>
+                <p><strong>Z:</strong> {{ original_z }}</p>
+            </div>
+            
+            <div class="calculation-summary">
+                <h3>Step-by-Step Calculations:</h3>
+            </div>
+            
+            <div class="steps">
+                {% for step in steps %}
+                    <div class="step">
+                        <div class="step-title">{{ step.description }}</div>
+                        <div>{{ step.operation }} = <strong>{{ step.result }}</strong></div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="final-result">
+                Final Result: {{ final_x }} + {{ original_y }} + {{ original_z }} = {{ final_result }}
+            </div>
+            
+        {% else %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+        
+        <a href="{% url 'math_form' %}" class="back-btn">← Back to Form</a>
+    </div>
+</body>
+</html>
